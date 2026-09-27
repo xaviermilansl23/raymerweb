@@ -1,0 +1,14 @@
+{
+  "/api": {
+    "target": "https://10.243.90.201:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "warn"
+  },
+  "/uploads": {
+    "target": "https://10.243.90.201:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "warn"
+  }
+}

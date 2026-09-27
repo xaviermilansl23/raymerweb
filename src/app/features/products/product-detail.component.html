@@ -1,0 +1,56 @@
+<section class="container detail-page">
+  <a routerLink="/productos" class="back">← Volver al catálogo</a>
+  @if (loading()) { <div class="detail-loading"><span class="spinner"></span> Cargando producto…</div> }
+  @else {
+    @if (product(); as product) {
+    <article class="detail-grid">
+      <div class="product-visual">
+        @if (images().length > 1) {
+          <div class="carousel">
+            <img [src]="images()[activeIndex()]" [alt]="product.nombre" class="carousel-main">
+            <button class="carousel-btn prev" (click)="activeIndex.set((activeIndex() - 1 + images().length) % images().length)" aria-label="Anterior" [class.hidden]="images().length < 2">‹</button>
+            <button class="carousel-btn next" (click)="activeIndex.set((activeIndex() + 1) % images().length)" aria-label="Siguiente" [class.hidden]="images().length < 2">›</button>
+            <div class="carousel-dots">
+              @for (img of images(); track $index) {
+                <button class="dot" [class.active]="$index === activeIndex()" (click)="activeIndex.set($index)" [attr.aria-label]="'Imagen ' + ($index + 1)"></button>
+              }
+            </div>
+          </div>
+        } @else {
+          <img [src]="images()[0] || 'no-product.svg'" [alt]="product.imagen_url ? product.nombre : ''">
+        }
+      </div>
+      <div class="product-copy">
+        <span class="category">{{ product.tipo_producto_nombre || 'Producto Raymer' }}</span>
+        <h1 class="display">{{ product.nombre }}</h1>
+        <section class="product-specs" aria-labelledby="product-specs-title">
+          <h2 id="product-specs-title">Información del producto</h2>
+          <dl>
+            <div><dt>Marca</dt><dd>{{ product.marca?.trim() || 'No especificada' }}</dd></div>
+            <div><dt>Modelo</dt><dd>{{ product.modelo?.trim() || 'No especificado' }}</dd></div>
+          </dl>
+        </section>
+        <p class="description">{{ product.descripcion || 'Consulta con nuestro equipo para conocer más detalles sobre este producto.' }}</p>
+        <div class="purchase-panel">
+          <div><span>Precio referencial</span><strong>{{ product.precio_venta | currency:'BOB':'Bs ':'1.2-2' }}</strong></div>
+          <div class="stock" [class.out]="product.stock_disponible <= 0"><span>{{ product.stock_disponible > 0 ? 'Disponible' : 'Sin stock' }}</span><strong>{{ product.stock_disponible > 0 ? (product.stock_disponible | number:'1.0-0') + ' unidades' : 'Agotado' }}</strong></div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-quote" type="button" (click)="agregarACotizacion()" [class.added]="justAdded()" [disabled]="maximoAdicional(product) <= 0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            @if (maximoAdicional(product) <= 0) {
+              {{ product.stock_disponible > 0 ? 'Stock máximo en la cotización' : 'Sin stock disponible' }}
+            } @else if (justAdded()) {
+              ¡Agregado a la cotización!
+            } @else {
+              {{ maximoAdicional(product) === 1 ? 'Agregar 1 a la cotización' : 'Agregar a la cotización' }}
+            }
+          </button>
+          <a class="btn btn-whatsapp" [href]="'https://wa.me/59172768877?text=' + message()" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+        <div class="service-note"><span>Asesoramiento personalizado</span><p>Confirma disponibilidad, entrega y condiciones directamente con nuestro equipo comercial.</p></div>
+      </div>
+    </article>
+    } @else { <div class="not-found"><h1>Producto no encontrado</h1><p>El producto puede haber sido retirado o el enlace es incorrecto.</p><a class="btn btn-primary" routerLink="/productos">Ver catálogo</a></div> }
+  }
+</section>

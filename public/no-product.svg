@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="320" viewBox="0 0 420 320" role="img" aria-label="Producto sin imagen">
+  <rect width="420" height="320" rx="28" fill="#edf4ef"/>
+  <path d="m126 116 84-43 84 43v94l-84 43-84-43z" fill="#d3e4d8" stroke="#739781" stroke-width="5"/>
+  <path d="m126 116 84 44 84-44M210 160v93" fill="none" stroke="#739781" stroke-width="5"/>
+  <path d="m164 96 85 44v31" fill="none" stroke="#739781" stroke-width="5"/>
+</svg>

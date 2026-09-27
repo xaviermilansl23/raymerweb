@@ -1,0 +1,42 @@
+<section class="profile-hero"><div class="container"><span class="eyebrow">Tu cuenta Raymer</span><h1 class="display">Mi perfil</h1><p>Mantén tus datos de contacto y seguridad al día.</p></div></section>
+<section class="container profile-page">
+  @if (loading()) { <div class="loading"><span class="spinner"></span> Cargando tu información…</div> }
+  @else {
+    <aside class="profile-summary">
+      <div class="avatar">{{ initials() }}</div>
+      <h2>{{ profile()?.nombre }}</h2><p>{{ profile()?.correo }}</p>
+      <div class="summary-row"><span>Usuario</span><strong>{{ profile()?.usuario }}</strong></div>
+      <div class="summary-row"><span>Teléfono</span><strong>{{ profile()?.telefono || 'Sin registrar' }}</strong></div>
+    </aside>
+    <div class="profile-forms">
+      <article class="form-card">
+        <div class="card-heading"><span>Información personal</span><h2 class="display">Datos de contacto</h2><p>Esta información nos ayuda a brindarte una atención más rápida.</p></div>
+        <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+          <div class="form-grid">
+            <div class="field full"><label for="nombre">Nombre completo</label><input id="nombre" formControlName="nombre" autocomplete="name"></div>
+            <div class="field"><label for="correo">Correo</label><input id="correo" type="email" formControlName="correo" autocomplete="email"></div>
+            <div class="field"><label for="telefono">Teléfono</label><input id="telefono" formControlName="telefono" autocomplete="tel"></div>
+            <div class="field full"><label for="usuario">Usuario</label><input id="usuario" formControlName="usuario" autocomplete="username"></div>
+          </div>
+          @if (profileError()) { <div class="alert alert-error">{{ profileError() }}</div> }
+          @if (profileMessage()) { <div class="alert alert-success">{{ profileMessage() }}</div> }
+          <button class="btn btn-primary" type="submit" [disabled]="savingProfile()">@if (savingProfile()) { <span class="spinner"></span> } Guardar cambios</button>
+        </form>
+      </article>
+
+      <article class="form-card security">
+        <div class="card-heading"><span>Seguridad</span><h2 class="display">Cambiar contraseña</h2><p>Usa una contraseña de al menos 8 caracteres que no utilices en otros sitios.</p></div>
+        <form [formGroup]="passwordForm" (ngSubmit)="savePassword()">
+          <div class="field"><label for="actual">Contraseña actual</label><input id="actual" type="password" formControlName="actual" autocomplete="current-password"></div>
+          <div class="form-grid">
+            <div class="field"><label for="nueva">Nueva contraseña</label><input id="nueva" type="password" formControlName="nueva" autocomplete="new-password"></div>
+            <div class="field"><label for="confirmar">Confirmar contraseña</label><input id="confirmar" type="password" formControlName="confirmar" autocomplete="new-password"></div>
+          </div>
+          @if (passwordError()) { <div class="alert alert-error">{{ passwordError() }}</div> }
+          @if (passwordMessage()) { <div class="alert alert-success">{{ passwordMessage() }}</div> }
+          <button class="btn btn-secondary" type="submit" [disabled]="savingPassword()">@if (savingPassword()) { <span class="spinner"></span> } Actualizar contraseña</button>
+        </form>
+      </article>
+    </div>
+  }
+</section>

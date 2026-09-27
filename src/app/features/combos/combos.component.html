@@ -1,0 +1,50 @@
+<section class="combos-hero">
+  <div class="container">
+    <span class="eyebrow">Promociones</span>
+    <h1 class="display">Combos.</h1>
+  </div>
+</section>
+
+<section class="container combos-body">
+  <p class="combos-intro">Descubre nuestros combos y packs con los mejores precios para tu negocio.</p>
+
+  <div class="banner-list">
+    @for (banner of banners(); track $index) {
+      <article class="banner-card anim-raise">
+        @if (!isFailed($index) && banner.image) {
+          @if (banner.link) {
+            <a [href]="banner.link" target="_blank" rel="noopener" [attr.aria-label]="'Ver ' + banner.title">
+              <img [src]="banner.image" [alt]="banner.title" loading="lazy" (error)="onImageError($index)">
+              <div class="banner-overlay">
+                @if (banner.badge) {
+                  <span class="banner-badge">{{ banner.badge }}</span>
+                }
+                <h2>{{ banner.title }}</h2>
+                @if (banner.subtitle) {
+                  <p>{{ banner.subtitle }}</p>
+                }
+              </div>
+            </a>
+          } @else {
+            <img [src]="banner.image" [alt]="banner.title" loading="lazy" (error)="onImageError($index)">
+            <div class="banner-overlay">
+              @if (banner.badge) {
+                <span class="banner-badge">{{ banner.badge }}</span>
+              }
+              <h2>{{ banner.title }}</h2>
+              @if (banner.subtitle) {
+                <p>{{ banner.subtitle }}</p>
+              }
+            </div>
+          }
+        } @else {
+          <div class="banner-placeholder">
+            <span class="banner-badge">BANNER</span>
+            <h2>{{ banner.title }}</h2>
+            <p>Coloca tu imagen en <code>public/combos/</code> y actualiza la ruta en <code>combos.component.ts</code>.</p>
+          </div>
+        }
+      </article>
+    }
+  </div>
+</section>

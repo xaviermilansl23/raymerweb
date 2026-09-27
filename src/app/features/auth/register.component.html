@@ -1,0 +1,26 @@
+<main class="auth-page register-page">
+  <section class="auth-story" aria-label="Presentación de Raymer">
+    <div class="story-content"><span class="eyebrow">Únete a Raymer</span><h1 class="display">Tus próximos proyectos empiezan aquí.</h1><p>Crea tu cuenta para guardar tus favoritos, preparar cotizaciones y mantener tus datos de contacto actualizados.</p><div class="story-points"><span>✓ Registro rápido</span><span>✓ Lista de deseos</span><span>✓ Cotizaciones en PDF</span></div></div>
+  </section>
+  <section class="auth-form-wrap">
+    <div class="auth-card wide">
+      <a routerLink="/productos" class="auth-brand"><img src="favicon.png" alt="" width="54" height="54"><span><b>Raymer</b><small>Soluciones que avanzan</small></span></a>
+      <div class="heading"><span class="eyebrow">Nueva cuenta</span><h2 class="display">Crea tu perfil</h2><p>Completa tus datos para comenzar.</p></div>
+      <p class="session-notice">{{ notice }}</p>
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="usuario">Usuario</label><input id="usuario" formControlName="usuario" autocomplete="username" placeholder="usuario.raymer">@if (form.controls.usuario.touched && form.controls.usuario.invalid) { <span class="error">Usa 3 o más letras, números, puntos, guiones o guion bajo.</span> }</div>
+          <div class="field"><label for="nombre">Nombre completo</label><input id="nombre" formControlName="nombre" autocomplete="name" placeholder="Nombre y apellido">@if (form.controls.nombre.touched && form.controls.nombre.invalid) { <span class="error">Ingresa tu nombre.</span> }</div>
+          <div class="field"><label for="telefono">Teléfono <small>(opcional)</small></label><input id="telefono" formControlName="telefono" autocomplete="tel" placeholder="70000000"></div>
+          <div class="field"><label for="correo">Correo</label><input id="correo" type="email" formControlName="correo" autocomplete="email" placeholder="nombre@correo.com">@if (form.controls.correo.touched && form.controls.correo.invalid) { <span class="error">Ingresa un correo válido.</span> }</div>
+          <div class="field"><label for="confirmar">Confirmar contraseña</label><input id="confirmar" [type]="showPassword() ? 'text' : 'password'" formControlName="confirmar" autocomplete="new-password" placeholder="Repite la contraseña"></div>
+          <div class="field"><label for="password">Contraseña</label><div class="password-field"><input id="password" [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres"><button type="button" (click)="showPassword.set(!showPassword())">{{ showPassword() ? 'Ocultar' : 'Ver' }}</button></div>@if (form.controls.password.touched && form.controls.password.invalid) { <span class="error">Debe tener al menos 8 caracteres.</span> }</div>
+        </div>
+        @if (error()) { <div class="alert alert-error" role="alert">{{ error() }}</div> }
+        <button class="btn btn-primary submit" type="submit" [disabled]="loading()">@if (loading()) { <span class="spinner"></span> } {{ loading() ? 'Creando cuenta…' : 'Crear mi cuenta' }}</button>
+      </form>
+      <p class="auth-switch">¿Ya tienes una cuenta? <a routerLink="/login" [queryParams]="authQueryParams">Iniciar sesión</a></p>
+      <a class="visitor-link" routerLink="/productos">← Seguir explorando como visitante</a>
+    </div>
+  </section>
+</main>
