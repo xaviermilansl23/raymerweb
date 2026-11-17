@@ -1,0 +1,469 @@
+.service-equipment-list {
+  display: grid;
+  gap: 26px;
+}
+.service-equipment {
+  --service-color: var(--accent);
+  --service-tint: var(--accent-soft);
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--nav);
+  overflow: hidden;
+  box-shadow: 0 12px 40px #101c3d05;
+}
+.service-equipment::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--service-color), var(--cyan));
+}
+.service-tone-review {
+  --service-color: #ac6b13;
+  --service-tint: #fff4df;
+}
+.service-tone-diagnosed {
+  --service-color: #8050c9;
+  --service-tint: #f1eaff;
+}
+.service-tone-ready,
+.service-tone-delivered {
+  --service-color: #16815d;
+  --service-tint: #e6f6ef;
+}
+.service-tone-cancelled {
+  --service-color: #ad4d5c;
+  --service-tint: #fceef1;
+}
+html[data-theme="dark"] .service-tone-review {
+  --service-color: #f2c369;
+  --service-tint: #352d24;
+}
+html[data-theme="dark"] .service-tone-diagnosed {
+  --service-color: #c6a6ff;
+  --service-tint: #2c2448;
+}
+html[data-theme="dark"] .service-tone-ready,
+html[data-theme="dark"] .service-tone-delivered {
+  --service-color: #7bdcb5;
+  --service-tint: #193b35;
+}
+html[data-theme="dark"] .service-tone-cancelled {
+  --service-color: #f0a4b1;
+  --service-tint: #3b2634;
+}
+.service-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 30px 32px 24px;
+}
+.service-device {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.service-device > div {
+  min-width: 0;
+}
+.service-device-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(145deg, var(--accent-soft), var(--surface));
+  color: var(--accent);
+}
+.service-device-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.4;
+}
+.service-device-type {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.service-device h3 {
+  font-size: clamp(21px, 2.1vw, 28px);
+  margin: 0 0 6px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.service-reference {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.service-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  max-width: 100%;
+  padding: 8px 12px;
+  border-radius: 30px;
+  background: var(--service-tint);
+  color: var(--service-color);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.service-status > span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.service-progress {
+  display: grid;
+  list-style: none;
+  padding: 22px 22px 0;
+  margin: 0 32px;
+  border-top: 1px solid var(--line);
+}
+.service-progress li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  padding: 0 6px;
+}
+.service-progress li > span:last-child {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.service-progress li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background: var(--line);
+  top: 15px;
+  left: calc(50% + 20px);
+  right: calc(-50% + 20px);
+}
+.service-progress li.complete::after {
+  background: var(--service-color);
+  opacity: 0.45;
+}
+.service-step-dot {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  background: var(--bg);
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 1;
+}
+.service-step-dot svg {
+  width: 15px;
+  height: 15px;
+}
+.service-progress li.complete .service-step-dot {
+  background: var(--service-tint);
+  color: var(--service-color);
+  border-color: transparent;
+}
+.service-progress li.current {
+  color: var(--service-color);
+  font-weight: 700;
+}
+.service-progress li.current .service-step-dot {
+  color: var(--bg);
+  background: var(--service-color);
+  border-color: var(--service-color);
+  box-shadow: 0 0 0 4px var(--service-tint);
+}
+.service-card-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+  padding: 30px 32px;
+}
+.service-card-content.has-diagnosis {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+.service-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+.service-section-label svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.service-request > p,
+.service-diagnosis > p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 12px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.service-device-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 35px;
+  margin: 25px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.service-device-meta > div {
+  min-width: 0;
+  max-width: 100%;
+}
+.service-device-meta dt {
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.service-device-meta dd {
+  font-size: 12px;
+  color: var(--ink);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.service-diagnosis {
+  padding: 22px 24px;
+  border-radius: 13px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  min-width: 0;
+}
+.service-recommendation {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.service-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 20px;
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.service-price > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.service-price strong {
+  font-size: 26px;
+  letter-spacing: -0.045em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.service-state-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 32px 24px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--service-tint);
+  color: var(--service-color);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.service-state-note svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.service-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 20px 32px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+.service-updated {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.service-updated time {
+  font-size: 12px;
+  color: var(--ink);
+}
+.service-whatsapp.button {
+  background: #167454;
+  border-color: #167454;
+  color: #fff;
+  gap: 10px;
+  font-size: 12px;
+  padding: 12px 18px;
+  max-width: 100%;
+  white-space: normal;
+}
+html[data-theme="dark"] .service-whatsapp.button {
+  color: #fff;
+}
+.service-whatsapp.button:hover {
+  background: #116345;
+  border-color: #116345;
+}
+.service-whatsapp svg:last-child {
+  width: 16px;
+  margin-left: 8px;
+}
+.service-tracking-empty {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  background: var(--nav);
+  color: var(--muted);
+  font-size: 14px;
+}
+.service-tracking-empty > svg {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.service-tracking-empty p {
+  margin: 0;
+}
+@media (max-width: 800px) {
+  .service-card-top {
+    padding: 24px;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .service-card-top .service-status {
+    margin-left: 74px;
+  }
+  .service-progress {
+    margin: 0 24px;
+    padding: 22px 0 0;
+  }
+  .service-progress li {
+    font-size: 10px;
+    padding: 0 3px;
+  }
+  .service-card-content,
+  .service-card-content.has-diagnosis {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    padding: 26px 24px;
+  }
+  .service-card-bottom {
+    padding: 20px 24px;
+  }
+  .service-state-note {
+    margin: 0 24px 24px;
+  }
+}
+@media (max-width: 480px) {
+  .service-card-top {
+    padding: 22px 18px;
+  }
+  .service-device {
+    gap: 12px;
+  }
+  .service-device-icon {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+    border-radius: 12px;
+  }
+  .service-device-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+  .service-device-type {
+    font-size: 9px;
+  }
+  .service-device h3 {
+    font-size: 22px;
+  }
+  .service-card-top .service-status {
+    margin-left: 58px;
+    font-size: 10px;
+  }
+  .service-progress {
+    margin: 0 18px;
+  }
+  .service-step-dot {
+    width: 27px;
+    height: 27px;
+  }
+  .service-progress li {
+    font-size: 9px;
+    gap: 8px;
+  }
+  .service-progress li:not(:last-child)::after {
+    top: 13px;
+    left: calc(50% + 17px);
+    right: calc(-50% + 17px);
+  }
+  .service-card-content {
+    padding: 24px 18px;
+  }
+  .service-request > p,
+  .service-diagnosis > p {
+    font-size: 13px;
+  }
+  .service-diagnosis {
+    padding: 20px 16px;
+  }
+  .service-price strong {
+    font-size: 24px;
+  }
+  .service-card-bottom {
+    padding: 18px;
+    gap: 15px;
+  }
+  .service-whatsapp.button {
+    width: 100%;
+    justify-content: center;
+  }
+  .service-updated br {
+    display: none;
+  }
+  .service-updated time {
+    margin-left: 6px;
+  }
+  .service-state-note {
+    margin: 0 18px 20px;
+  }
+  .service-tracking-empty {
+    padding: 22px 18px;
+    align-items: flex-start;
+  }
+}

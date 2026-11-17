@@ -1,0 +1,38 @@
+.seccion {
+  max-width: 1680px;
+  margin-inline: auto;
+  padding: 24px clamp(12px, 2.6vw, 42px) 64px;
+}
+
+.seccion :global(.text-link) {
+  display: block;
+  margin-top: 20px;
+}
+
+.galeria {
+  display: grid;
+  gap: 24px;
+}
+
+.combo {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.combo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 88svh;
+  object-fit: contain;
+}
+
+.info {
+  padding: clamp(14px, 2.5vw, 24px);
+  overflow-wrap: anywhere;
+}
+
+.info h2 { margin: 0; font-size: clamp(18px, 2.3vw, 26px); }
+.info p { margin: 8px 0 0; white-space: pre-line; }
